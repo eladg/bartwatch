@@ -49,6 +49,7 @@ function setSelectedTrain(destination) {
 /*----------------------------------------------------------------------*\
     Bartfunk Tunes
 \*----------------------------------------------------------------------*/
+var bartTune = new Audio("./audio/high-ding.mp3");
 function playSound(soundId) {
   var soundFile = "not found";
   switch (soundId) {
@@ -63,9 +64,8 @@ function playSound(soundId) {
       break;
   }
   if (soundFile == "not found") return;
-
-  var audio = new Audio("./audio/" + soundFile);
-  audio.play();
+  bartTune.src ="./audio/" + soundFile;
+  bartTune.play();
 }
 /*----------------------------------------------------------------------*\
     Bart Station
