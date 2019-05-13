@@ -7,16 +7,16 @@ jobs:
     steps:
       - checkout
       - run:
-         name: Install awscli
+         name: Installing awscli
          command: |
             apt-get -y -qq update
             apt-get -y -qq install awscli
             echo '*****AWS-CLI INSTALLED SUCCESSFULLY*****'
       - run: 
-          name: Build the codebase
+          name: Building the codebase
           command: ./scripts/build.sh
       - run: 
-          name: Deploying the codebase'
+          name: Deploying the codebase
           command: ./scripts/deploy-to-s3.sh
 
 workflows:
@@ -26,4 +26,4 @@ workflows:
       - build:
           filters:
             branches:
-              only: staging
+              only: master
