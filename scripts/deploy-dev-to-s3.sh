@@ -2,7 +2,7 @@
 
 # ============================  Script Variables   ============================
 DEPLOY_BUCKET="bartdev.gariany.com"
-PUBLIC_FOLDER="./public"
+PUBLIC_FOLDER="../public"
 PUBLIC_URL="http://bartdev.gariany.com"
 # =============================================================================
 
