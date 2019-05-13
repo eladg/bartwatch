@@ -1,17 +1,29 @@
 version: 2.1
-orbs:
-  aws-s3: circleci/aws-s3@1.0.8
 jobs:
   build:
+    description: our build and deploy job for the website
     docker:
-      - image: 'circleci/python:3.7'
+      - image: node:boron
     steps:
       - checkout
-      - aws-s3/sync:
-          from: ./src
-          to: 's3://bart.gariany.com'
-          aws-region: AWS_REGION_BLUE
-          overwrite: true
-          arguments: |
-            --acl public-read \
-            --cache-control "max-age=86400" \
+      - run:
+         name: Install awscli
+         command: |
+            apt-get -y -qq update
+            apt-get -y -qq install awscli
+            echo '*****AWS-CLI INSTALLED SUCCESSFULLY*****'
+      - run: 
+          name: Build the codebase
+          command: ./scripts/build.sh
+      - run: 
+          name: Deploying the codebase'
+          command: ./scripts/deploy-to-s3.sh
+
+workflows:
+  version: 2.1
+  build_and_deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: staging
