@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # ============================  Script Variables   ============================
-SOURCE_FOLDER="../src"
-PUBLIC_FOLDER="../public"
+SOURCE_FOLDER="./src"
+PUBLIC_FOLDER="./public"
 
 # =============================================================================
 
