@@ -16,7 +16,7 @@ jobs:
           name: Building the codebase
           command: ./scripts/build.sh
       - run: 
-          name: Deploying the codebase'
+          name: Deploying the codebase
           command: ./scripts/deploy-to-s3.sh
   build_dev:
     description: our build and deploy job for the website dev environment
@@ -34,8 +34,8 @@ jobs:
           name: Building the codebase
           command: ./scripts/build.sh
       - run: 
-          name: Deploying the codebase'
-          command: ./scripts/deploy-dev-to-s3.sh
+          name: Deploying the codebase
+          command: sh ./scripts/deploy-dev-to-s3.sh
 workflows:
   version: 2
   build_and_deploy:
