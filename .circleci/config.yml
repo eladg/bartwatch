@@ -14,8 +14,8 @@ jobs:
             echo '*****AWS-CLI INSTALLED SUCCESSFULLY*****'
       - run: 
           name: Building the codebase
-          command:|
-            cd scripts
+          command: |
+            cd scripts /
             ./build.sh
       - run: 
           name: Deploying the codebase
@@ -34,8 +34,8 @@ jobs:
             echo '*****AWS-CLI INSTALLED SUCCESSFULLY*****'
       - run: 
           name: Building the codebase
-          command:|
-            cd scripts
+          command: |
+            cd scripts /
             ./build.sh
       - run: 
           name: Deploying the codebase
