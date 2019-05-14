@@ -17,3 +17,10 @@ function playSampler(string_of_the_sound_to_play){
     }
     sampler.triggerAttack(string_of_the_sound_to_play);
 }
+
+document.documentElement.addEventListener(
+    "mousedown", function(){
+      mouse_IsDown = true;
+      if (Tone.context.state !== 'running') {
+      Tone.context.resume();
+    }})
