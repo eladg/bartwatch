@@ -10,6 +10,10 @@ var sampler = new Tone.Sampler({
     "E3" : "./audio/woosh.mp3",
 });
 
+
 function playSampler(string_of_the_sound_to_play){
+    if (Tone.context.state !== 'running') {
+        Tone.context.resume();
+    }
     sampler.triggerAttack(string_of_the_sound_to_play);
 }
