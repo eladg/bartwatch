@@ -1,6 +1,22 @@
 version: 2.1
 jobs:
   build:
+    description: our build and deploy job for the website
+    docker:
+      - image: brentley/awscli
+    steps:
+      - checkout
+      - run: 
+          name: Building the codebase
+          command: |
+            cd scripts 
+            sh ./build.sh
+      - run: 
+          name: Deploying the codebase
+          command: |
+            cd scripts 
+            sh ./deploy-to-s3.sh
+  build_dev:
     description: our build and deploy job for the website dev environment
     docker:
       - image: brentley/awscli
@@ -11,23 +27,6 @@ jobs:
           command: |
             cd scripts 
             sh ./build.sh
-  deploy:
-    description: Deploying our build to AWS-S3
-    docker:
-      - image: brentley/awscli
-    steps:
-      - checkout
-      - run: 
-          name: Deploying the codebase
-          command: |
-            cd scripts
-            sh ./deploy-to-s3.sh
-  deploy_dev:
-    description: Deploying our build to AWS-S3
-    docker:
-      - image: brentley/awscli
-    steps:
-      - checkout
       - run: 
           name: Deploying the codebase
           command: |
@@ -37,12 +36,11 @@ workflows:
   version: 2
   build_and_deploy:
     jobs:
-      - build
-      - deploy:
+      - build:
           filters:
             branches:
               only: staging
-      - deploy_dev:
+      - build_dev:
           filters:
             branches:
               only: dev
