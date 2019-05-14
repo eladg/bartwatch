@@ -5,15 +5,9 @@ jobs:
   build:
     description: our build and deploy job for the website
     docker:
-      - image: node:boron
+      - image: 'circleci/python:2.7'
     steps:
       - checkout
-      - run:
-         name: Installing awscli
-         command: |
-            apt-get -y -qq update
-            apt-get -y -qq install awscli
-            echo '*****AWS-CLI INSTALLED SUCCESSFULLY*****'
       - run: 
           name: Building the codebase
           command: |
@@ -29,15 +23,9 @@ jobs:
   build_dev:
     description: our build and deploy job for the website dev environment
     docker:
-      - image: node:boron
+      - image: 'circleci/python:2.7'
     steps:
       - checkout
-      - run:
-         name: Installing awscli
-         command: |
-            apt-get -y -qq update
-            apt-get -y -qq install awscli
-            echo '*****AWS-CLI INSTALLED SUCCESSFULLY*****'
       - run: 
           name: Building the codebase
           command: |
