@@ -1,11 +1,9 @@
 version: 2.1
-orbs:
-  aws-s3: circleci/aws-s3@1.0.9
 jobs:
   build:
     description: our build and deploy job for the website
     docker:
-      - image: 'circleci/python:2.7'
+      - image: brentley/awscli
     steps:
       - checkout
       - run: 
@@ -13,18 +11,15 @@ jobs:
           command: |
             cd scripts 
             sh ./build.sh
-      - aws-s3/sync:
-          from: ./public
-          to: 's3://bart.gariany.com'
-          arguments: |
-            --acl public-read \
-            --cache-control "max-age=86400" \
-          overwrite: true
-          aws-region: AWS_REGION_BLUE
+      - run: 
+          name: Deploying the codebase
+          command: |
+            cd scripts 
+            sh ./deploy-to-s3.sh
   build_dev:
     description: our build and deploy job for the website dev environment
     docker:
-      - image: 'circleci/python:2.7'
+      - image: brentley/awscli
     steps:
       - checkout
       - run: 
@@ -32,14 +27,11 @@ jobs:
           command: |
             cd scripts 
             sh ./build.sh
-      - aws-s3/sync:
-          from: ./public
-          to: 's3://bart.gariany.com'
-          arguments: |
-            --acl public-read \
-            --cache-control "max-age=86400" \
-          overwrite: true
-          aws-region: AWS_REGION_BLUE
+      - run: 
+          name: Deploying the codebase
+          command: |
+            cd scripts
+            sh ./deploy-dev-to-s3.sh
 workflows:
   version: 2
   build_and_deploy:
